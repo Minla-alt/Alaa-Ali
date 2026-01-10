@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About"
+  },
+  "home": {
+    "title": "Welcome to Bilingual Educational Platform",
+    "welcome": "Welcome to our bilingual educational platform!",
+    "description": "This platform provides educational content in both Arabic and English to help you learn effectively.",
+    "features": "Our Features",
+    "feature1": "Bilingual content in Arabic and English",
+    "feature2": "Interactive learning materials",
+    "feature3": "AI-powered educational tools",
+    "availableContent": "Available Content"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "We are dedicated to providing high-quality bilingual education.",
+    "mission": "Our Mission",
+    "missionDescription": "To bridge language barriers in education and provide accessible learning resources for everyone."
+  },
+  "footer": {
+    "copyright": "© 2024 Bilingual Educational Platform. All rights reserved."
+  },
+  "loading": "Loading...",
+  "errors": {
+    "contentFetchFailed": "Failed to fetch content. Please try again later."
+  }
+}
