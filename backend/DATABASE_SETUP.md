@@ -454,6 +454,25 @@ After completing this setup:
 
 ---
 
+## Seeding Initial Data (Task 3)
+
+This repo includes a seed script entrypoint:
+
+- Script: `backend/src/utils/seed.js`
+- Command: `npm run seed`
+
+For now, the script only verifies that the DB connection and models load correctly (it does not insert data yet). In Task 3, we’ll extend it to insert initial Courses/Books and other starter data.
+
+To run it:
+
+```bash
+cd backend
+cp .env.example .env   # if needed
+npm run seed
+```
+
+---
+
 ## Troubleshooting
 
 ### Common Issues
