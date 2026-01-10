@@ -93,9 +93,15 @@ app.get('/health', (req, res) => {
  * API Routes
  */
 const authRoutes = require('./routes/auth');
+const coursesRoutes = require('./routes/courses');
+const booksRoutes = require('./routes/books');
 
 // Mount authentication routes
 app.use('/api/auth', authRoutes);
+
+// Content routes
+app.use('/api/courses', coursesRoutes);
+app.use('/api/books', booksRoutes);
 
 // Basic API info endpoint
 app.get('/api', (req, res) => {
