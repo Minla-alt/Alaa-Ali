@@ -91,8 +91,11 @@ app.get('/health', (req, res) => {
 
 /**
  * API Routes
- * (Routes will be added in future tasks)
  */
+const authRoutes = require('./routes/auth');
+
+// Mount authentication routes
+app.use('/api/auth', authRoutes);
 
 // Basic API info endpoint
 app.get('/api', (req, res) => {
@@ -102,6 +105,12 @@ app.get('/api', (req, res) => {
     documentation: '/api/docs',
     endpoints: {
       health: '/health',
+      auth: {
+        signup: 'POST /api/auth/signup',
+        login: 'POST /api/auth/login',
+        logout: 'POST /api/auth/logout',
+        me: 'GET /api/auth/me'
+      },
       users: '/api/users',
       courses: '/api/courses',
       books: '/api/books',
