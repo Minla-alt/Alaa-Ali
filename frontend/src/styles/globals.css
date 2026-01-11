@@ -87,3 +87,28 @@ body {
     @apply inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin;
   }
 }
+
+/* Custom Animations */
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

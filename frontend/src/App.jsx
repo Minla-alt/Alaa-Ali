@@ -13,7 +13,7 @@ import CoursesPage from './pages/CoursesPage';
 import CourseDetailPage from './pages/CourseDetailPage';
 import BooksPage from './pages/BooksPage';
 import BookDetailPage from './pages/BookDetailPage';
-import Dashboard from './pages/Dashboard';
+import DashboardPage from './pages/DashboardPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AIRecommendations from './pages/AIRecommendations';
@@ -55,7 +55,7 @@ function App() {
               {/* Protected Routes */}
               <Route path="/dashboard" element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <DashboardPage />
                 </ProtectedRoute>
               } />
               <Route path="/ai-assistant" element={
