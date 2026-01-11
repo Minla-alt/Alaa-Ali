@@ -299,7 +299,7 @@ const getTodos = async (req, res) => {
 
     // Get counts by status
     const statusCounts = await StudyTodo.aggregate([
-      { $match: { userId: mongoose.Types.ObjectId(userId) } },
+      { $match: { userId: new mongoose.Types.ObjectId(userId) } },
       {
         $group: {
           _id: '$status',
@@ -587,29 +587,50 @@ const updateProgress = async (req, res) => {
     }
 
     // Determine content type and validate
-    const finalCourseId = courseId || contentId;
-    const finalBookId = bookId || contentId;
+    let finalCourseId = courseId || null;
+    let finalBookId = bookId || null;
 
-    // Check if content exists
-    if (finalCourseId) {
-      const course = await Course.findById(finalCourseId);
-      if (!course) {
-        return res.status(404).json({
-          success: false,
-          message: 'Course not found',
-          statusCode: 404
-        });
+    // If courseId and bookId not provided, determine from contentId
+    if (!finalCourseId && !finalBookId && contentId) {
+      // Try to find as course first
+      const course = await Course.findById(contentId);
+      if (course) {
+        finalCourseId = contentId;
+      } else {
+        // Try as book
+        const book = await Book.findById(contentId);
+        if (book) {
+          finalBookId = contentId;
+        } else {
+          return res.status(404).json({
+            success: false,
+            message: 'Content not found',
+            statusCode: 404
+          });
+        }
       }
-    }
+    } else {
+      // Validate provided courseId or bookId
+      if (finalCourseId) {
+        const course = await Course.findById(finalCourseId);
+        if (!course) {
+          return res.status(404).json({
+            success: false,
+            message: 'Course not found',
+            statusCode: 404
+          });
+        }
+      }
 
-    if (finalBookId) {
-      const book = await Book.findById(finalBookId);
-      if (!book) {
-        return res.status(404).json({
-          success: false,
-          message: 'Book not found',
-          statusCode: 404
-        });
+      if (finalBookId) {
+        const book = await Book.findById(finalBookId);
+        if (!book) {
+          return res.status(404).json({
+            success: false,
+            message: 'Book not found',
+            statusCode: 404
+          });
+        }
       }
     }
 
