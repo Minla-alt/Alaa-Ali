@@ -124,6 +124,7 @@ frontend/src/
 4. **Start development server:**
    ```bash
    npm run dev
+   npm start
    ```
 
    The application will be available at `http://localhost:3000`
