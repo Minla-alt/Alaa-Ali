@@ -16,7 +16,7 @@ import BookDetailPage from './pages/BookDetailPage';
 import DashboardPage from './pages/DashboardPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import AIRecommendations from './pages/AIRecommendations';
+import AIRecommendationsPage from './pages/AIRecommendationsPage';
 import PageNotFound from './pages/PageNotFound';
 
 // Import styles
@@ -58,9 +58,9 @@ function App() {
                   <DashboardPage />
                 </ProtectedRoute>
               } />
-              <Route path="/ai-assistant" element={
+              <Route path="/ai-recommendations" element={
                 <ProtectedRoute>
-                  <AIRecommendations />
+                  <AIRecommendationsPage />
                 </ProtectedRoute>
               } />
               

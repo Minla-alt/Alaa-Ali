@@ -4,6 +4,7 @@
     "courses": "Courses",
     "books": "Books",
     "dashboard": "Dashboard",
+    "ai-recommendations": "AI Recommendations",
     "login": "Login",
     "signup": "Sign Up",
     "logout": "Logout"
@@ -163,25 +164,84 @@
   "recommendations": {
     "title": "AI Recommendations",
     "subtitle": "Get personalized learning recommendations powered by AI",
-    "dailyRecommendation": "Today's Recommendation",
-    "getRecommendation": "Get New Recommendation",
-    "feedback": "Feedback",
+    "dailyRecommendation": "Your Daily Learning Recommendation",
+    "personalizedForYou": "Personalized for you",
+    "getRecommendation": "Get Another Recommendation",
+    "startLearning": "Start Learning",
+    "saveForLater": "Save for Later",
+    "unsave": "Unsave",
+    "saved": "Saved",
+    "feedback": "Was this helpful?",
     "helpful": "Helpful",
     "notHelpful": "Not Helpful",
     "submitFeedback": "Submit Feedback",
     "thankYou": "Thank you for your feedback!",
     "loading": "Getting your personalized recommendation...",
-    "noRecommendation": "No recommendation available right now",
+    "noRecommendation": "No recommendations available. Check back later!",
     "tryAgain": "Try Again",
-    "whyRecommended": "Why I recommend this",
-    "personalizedForYou": "Personalized for you",
+    "whyRecommended": "Why this recommendation?",
     "feedbackPlaceholder": "Tell us more about your experience...",
     "history": "Recent Recommendations",
+    "viewAll": "View All History",
     "tipsTitle": "Tips for Better Recommendations",
     "tip1": "Take courses or save books you find interesting",
     "tip2": "Complete your learning profile with subjects you enjoy",
     "tip3": "Provide feedback on recommendations to improve suggestions",
-    "tip4": "Use the app regularly to help AI learn your preferences"
+    "tip4": "Use the app regularly to help AI learn your preferences",
+    "preferences": {
+      "title": "Preferences",
+      "timeAvailable": "Time Available",
+      "timeOptions": {
+        "15": "15 minutes",
+        "30": "30 minutes", 
+        "60": "1 hour",
+        "120": "2+ hours"
+      },
+      "subject": "Subject",
+      "subjectAll": "All Subjects",
+      "contentType": "Content Type",
+      "preferCourses": "Prefer Courses",
+      "preferBooks": "Prefer Books",
+      "preferBoth": "Prefer Both"
+    },
+    "stats": {
+      "title": "Your Learning Stats",
+      "savedItems": "Items Saved",
+      "averageProgress": "Average Progress",
+      "learningStreak": "Learning Streak",
+      "days": "days"
+    },
+    "error": {
+      "networkError": "Network error. Please check your connection.",
+      "serverError": "Server error. Please try again later.",
+      "noRecommendationAvailable": "No recommendation available right now.",
+      "feedbackFailed": "Failed to submit feedback. Please try again.",
+      "saveFailed": "Failed to save item. Please try again."
+    },
+    "success": {
+      "feedbackSubmitted": "Feedback submitted successfully!",
+      "itemSaved": "Item saved to your library!",
+      "itemUnsaved": "Item removed from your library!"
+    },
+    "timeEstimates": {
+      "minutes": "{{count}} minutes",
+      "hours": "{{count}} hours",
+      "hour": "1 hour"
+    },
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate", 
+      "advanced": "Advanced"
+    },
+    "sources": {
+      "khanAcademy": "Khan Academy",
+      "mit": "MIT",
+      "stanford": "Stanford",
+      "coursera": "Coursera",
+      "edx": "edX",
+      "udemy": "Udemy",
+      "other": "Other"
+    }
   },
   "common": {
     "loading": "Loading...",
