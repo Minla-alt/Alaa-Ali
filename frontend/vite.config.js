@@ -17,4 +17,21 @@ export default defineConfig({
       '@': '/src',
     },
   },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    minify: 'terser',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          i18n: ['react-i18next', 'i18next']
+        }
+      }
+    }
+  },
+  define: {
+    // Ensure proper environment variable handling
+    __DEV__: JSON.stringify(process.env.NODE_ENV === 'development')
+  }
 })
