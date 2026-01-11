@@ -95,6 +95,7 @@ app.get('/health', (req, res) => {
 const authRoutes = require('./routes/auth');
 const coursesRoutes = require('./routes/courses');
 const booksRoutes = require('./routes/books');
+const dashboardRoutes = require('./routes/dashboard');
 
 // Mount authentication routes
 app.use('/api/auth', authRoutes);
@@ -104,6 +105,9 @@ app.use('/api/courses', coursesRoutes);
 
 // Mount books routes
 app.use('/api/books', booksRoutes);
+
+// Mount dashboard routes
+app.use('/api/dashboard', dashboardRoutes);
 
 // Basic API info endpoint
 app.get('/api', (req, res) => {
@@ -119,12 +123,32 @@ app.get('/api', (req, res) => {
         logout: 'POST /api/auth/logout',
         me: 'GET /api/auth/me'
       },
-      users: '/api/users',
-      courses: '/api/courses',
-      books: '/api/books',
-      progress: '/api/progress',
-      todos: '/api/todos',
-      saved: '/api/saved'
+      courses: {
+        list: 'GET /api/courses',
+        get: 'GET /api/courses/:id',
+        save: 'POST /api/courses/:id/save',
+        unsave: 'DELETE /api/courses/:id/save',
+        saved: 'GET /api/courses/user/saved'
+      },
+      books: {
+        list: 'GET /api/books',
+        get: 'GET /api/books/:id',
+        save: 'POST /api/books/:id/save',
+        unsave: 'DELETE /api/books/:id/save',
+        saved: 'GET /api/books/user/saved'
+      },
+      dashboard: {
+        stats: 'GET /api/dashboard/stats',
+        progress: 'GET /api/dashboard/progress',
+        savedContent: 'GET /api/dashboard/saved-content',
+        todos: {
+          list: 'GET /api/dashboard/todos',
+          create: 'POST /api/dashboard/todos',
+          update: 'PATCH /api/dashboard/todos/:todoId',
+          delete: 'DELETE /api/dashboard/todos/:todoId'
+        },
+        updateProgress: 'PATCH /api/dashboard/progress/:contentId'
+      }
     }
   });
 });
@@ -150,7 +174,15 @@ app.use('/api/*', (req, res) => {
       'GET /api/books/:id',
       'POST /api/books/:id/save',
       'DELETE /api/books/:id/save',
-      'GET /api/books/user/saved'
+      'GET /api/books/user/saved',
+      'GET /api/dashboard/stats',
+      'GET /api/dashboard/progress',
+      'GET /api/dashboard/saved-content',
+      'GET /api/dashboard/todos',
+      'POST /api/dashboard/todos',
+      'PATCH /api/dashboard/todos/:todoId',
+      'DELETE /api/dashboard/todos/:todoId',
+      'PATCH /api/dashboard/progress/:contentId'
     ]
   });
 });
