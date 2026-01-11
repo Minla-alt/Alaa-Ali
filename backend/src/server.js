@@ -89,25 +89,43 @@ app.use((req, res, next) => {
  */
 app.get('/api/health', (req, res) => {
   const dbStates = {
-    0: 'Disconnected',
-    1: 'Connected',
-    2: 'Connecting',
-    3: 'Disconnecting'
+    0: 'منقطع',
+    1: 'متصل',
+    2: 'جاري الاتصال',
+    3: 'جاري قطع الاتصال'
   };
   
-  res.status(200).json({
+  const healthData = {
     status: 'OK',
-    message: 'Bilingual Educational Platform API is running',
+    message: 'منصة تعليمية ثنائية اللغة - API يعمل بشكل طبيعي',
     timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
+    uptime: Math.floor(process.uptime()),
     environment: process.env.NODE_ENV || 'development',
+    server: {
+      port: PORT,
+      nodeVersion: process.version,
+      platform: process.platform
+    },
     database: {
-      status: dbStates[mongoose.connection.readyState] || 'Unknown',
+      status: dbStates[mongoose.connection.readyState] || 'غير معروف',
       readyState: mongoose.connection.readyState,
-      host: mongoose.connection.host,
-      name: mongoose.connection.name
+      host: mongoose.connection.host || 'غير محدد',
+      name: mongoose.connection.name || 'غير محدد'
+    },
+    endpoints: {
+      apiInfo: `/api`,
+      courses: `/api/courses`,
+      books: `/api/books`,
+      auth: `/api/auth`
+    },
+    help: {
+      documentation: 'MONGODB_SETUP.md',
+      community: 'https://community.mongodb.com/',
+      atlas: 'https://cloud.mongodb.com'
     }
-  });
+  };
+  
+  res.status(200).json(healthData);
 });
 
 /**
@@ -299,44 +317,95 @@ const startServer = async () => {
   try {
     // Connect to MongoDB
     console.log('🔄 Connecting to MongoDB...');
+    console.log('💡 Tip: Make sure your MONGODB_URI is set in .env file');
+    
     await connectDB();
     console.log('✅ Database connected successfully');
+    console.log('🎉 Ready to serve requests!');
     
     // Start Express server
     const server = app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-      console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`🌐 API Base URL: http://localhost:${PORT}`);
-      console.log(`🏥 Health Check: http://localhost:${PORT}/health`);
-      console.log(`📊 API Info: http://localhost:${PORT}/api`);
+      console.log('\n🚀 ' + '='.repeat(50));
+      console.log(`   الخادم يعمل على المنفذ ${PORT}`);
+      console.log(`   البيئة: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`   🌐 API Base URL: http://localhost:${PORT}`);
+      console.log(`   🏥 فحص الحالة: http://localhost:${PORT}/api/health`);
+      console.log(`   📊 معلومات API: http://localhost:${PORT}/api`);
+      console.log(`   🚀 قائمة الدورات: http://localhost:${PORT}/api/courses`);
+      console.log(`   📚 قائمة الكتب: http://localhost:${PORT}/api/books`);
+      console.log('🚀 ' + '='.repeat(50));
       
       if (process.env.NODE_ENV === 'development') {
-        console.log('📚 API Documentation will be available at: /api/docs');
+        console.log('\n📚 للاستخدام في التطوير:');
+        console.log('   • قم بإعداد MongoDB Atlas أولاً (راجع MONGODB_SETUP.md)');
+        console.log('   • تأكد من ملف .env يحتوي على MONGODB_URI صحيح');
+        console.log('   • لزرع البيانات: npm run seed');
+        console.log('   • لفحص قاعدة البيانات: http://localhost:' + PORT + '/api/health');
       }
     });
     
     // Graceful shutdown
     process.on('SIGTERM', () => {
-      console.log('📴 SIGTERM received, shutting down gracefully');
+      console.log('\n📴 تم استلام إشارة الإغلاق الآمن للخادم...');
       server.close(() => {
-        console.log('💫 Process terminated');
+        console.log('💫 تم إنهاء العملية بنجاح');
       });
     });
     
   } catch (error) {
-    console.error('❌ Failed to start server:', error);
+    console.error('\n❌ فشل في بدء تشغيل الخادم:', error.message);
+    console.error('\n🔧 حلول مقترحة:');
+    
+    if (error.message.includes('Authentication failed') || error.message.includes('invalid')) {
+      console.error('   • تحقق من اسم المستخدم وكلمة المرور في MONGODB_URI');
+      console.error('   • تأكد من صحة Connection String');
+      console.error('   • راجع MongoDB Atlas > Database Access');
+    } else if (error.message.includes('ECONNREFUSED') || error.message.includes('connect')) {
+      console.error('   • تأكد من وجود اتصال إنترنت');
+      console.error('   • تحقق من Network Access في MongoDB Atlas (يجب أن يسمح بـ 0.0.0.0/0)');
+      console.error('   • تأكد من أن Cluster يعمل وليس متوقف');
+    } else if (error.message.includes('ENOTFOUND') || error.message.includes('getaddrinfo')) {
+      console.error('   • تحقق من صحة اسم الـ cluster في MONGODB_URI');
+      console.error('   • تأكد من صيغة Connection String صحيحة');
+    } else {
+      console.error('   • راجع ملف .env للتأكد من MONGODB_URI صحيح');
+      console.error('   • راجع MONGODB_SETUP.md للتفاصيل');
+      console.error('   • تحقق من MongoDB Atlas dashboard');
+    }
+    
+    console.error('\n📖 للمزيد من المساعدة، راجع:');
+    console.error('   • MONGODB_SETUP.md - الدليل الشامل');
+    console.error('   • MongoDB Atlas: https://cloud.mongodb.com');
+    console.error('   • MongoDB Docs: https://docs.mongodb.com/');
+    
     process.exit(1);
   }
 };
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
-  console.error('❌ Uncaught Exception:', error);
+  console.error('\n❌ خطأ غير محصور (Uncaught Exception):', error.message);
+  console.error('\n🔍 تفاصيل الخطأ:');
+  console.error('   • Message:', error.message);
+  console.error('   • Stack:', error.stack);
+  console.error('\n💡 حلول مقترحة:');
+  console.error('   • تحقق من ملف .env و MONGODB_URI');
+  console.error('   • تأكد من الاتصال بقاعدة البيانات');
+  console.error('   • راجع MongoDB Atlas dashboard');
+  console.error('\n📖 للمساعدة: MONGODB_SETUP.md');
+  
   process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+  console.error('\n❌ رفض غير معالج (Unhandled Rejection):');
+  console.error('   • Promise:', promise);
+  console.error('   • Reason:', reason);
+  console.error('\n💡 هذا قد يكون خطأ في الاتصال بقاعدة البيانات');
+  console.error('   • تحقق من MONGODB_URI في ملف .env');
+  console.error('   • تأكد من Network Access في MongoDB Atlas');
+  console.error('\n📖 للمساعدة: MONGODB_SETUP.md');
+  
   process.exit(1);
 });
 

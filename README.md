@@ -55,13 +55,15 @@ npm install
 #### Backend (.env)
 ```bash
 # انسخ الملف الأساسي
-cp backend/.env.example backend/.env
+cd backend
+cp .env.example .env
 
-# حدث المتغيرات
-MONGODB_URI=mongodb://localhost:27017/educational_platform
-JWT_SECRET=your-super-secret-jwt-key-change-this
+# تحديث المتغيرات - راجع MONGODB_SETUP.md للحصول على MONGODB_URI
+MONGODB_URI=mongodb+srv://your-username:your-password@cluster0.xxxxx.mongodb.net/educational_platform?retryWrites=true&w=majority
+JWT_SECRET=your-super-secret-jwt-key-must-be-32-characters-minimum-change-in-production
 NODE_ENV=development
 PORT=3001
+CORS_ORIGIN=http://localhost:3000
 ```
 
 #### Frontend (.env.local)
@@ -73,20 +75,31 @@ echo "VITE_API_BASE_URL=http://localhost:3001" > .env.local
 
 ### تشغيل المشروع
 
-#### Terminal 1: قاعدة البيانات
+#### الخطوة 1: إعداد MongoDB Atlas
+أولاً، قم بإعداد MongoDB Atlas اتباعاً للدليل الشامل:
+📖 **[MONGODB_SETUP.md](MONGODB_SETUP.md)** - دليل إعداد MongoDB Atlas خطوة بخطوة
+
 ```bash
-# تشغيل MongoDB
-mongod --fork --logpath /tmp/mongodb.log --dbpath /data/db
+# أو استخدم الأداة المساعدة للاختبار السريع
+cd backend
+npm run test:db  # اختبار الاتصال بقاعدة البيانات
 ```
 
-#### Terminal 2: Backend
+#### الخطوة 2: زرع البيانات التجريبية (اختياري)
+```bash
+cd backend
+npm run seed  # إضافة دورات وكتب تجريبية
+```
+
+#### الخطوة 3: تشغيل Backend
 ```bash
 cd backend
 npm run dev
-# أو npm start للإنتاج
+# أو للإنتاج:
+npm start
 ```
 
-#### Terminal 3: Frontend
+#### الخطوة 4: تشغيل Frontend
 ```bash
 cd frontend
 npm run dev
@@ -96,6 +109,14 @@ npm run dev
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:3001
 - **Health Check**: http://localhost:3001/api/health
+- **API Documentation**: http://localhost:3001/api
+
+### إعداد سريع مع نص واحد (Quick Setup)
+```bash
+cd backend
+npm run setup  # تثبيت + اختبار + زرع البيانات
+npm run dev    # تشغيل الخادم
+```
 
 ## 📋 API Documentation
 
