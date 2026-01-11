@@ -1,0 +1,201 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "courses": "الدورات",
+    "books": "الكتب",
+    "dashboard": "لوحة التحكم",
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "logout": "تسجيل الخروج"
+  },
+  "courses": {
+    "title": "الدورات",
+    "filterBySubject": "تصفية حسب المادة",
+    "filterByLevel": "تصفية حسب المستوى",
+    "filterByLanguage": "تصفية حسب اللغة",
+    "search": "البحث في الدورات...",
+    "save": "حفظ",
+    "unsave": "إلغاء الحفظ",
+    "saved": "تم الحفظ",
+    "loading": "جاري تحميل الدورات...",
+    "noCourses": "لم يتم العثور على دورات",
+    "subject": "المادة",
+    "level": "المستوى",
+    "language": "اللغة",
+    "source": "المصدر",
+    "duration": "المدة",
+    "viewDetails": "عرض التفاصيل",
+    "allSubjects": "جميع المواد",
+    "allLevels": "جميع المستويات",
+    "allLanguages": "جميع اللغات"
+  },
+  "books": {
+    "title": "الكتب",
+    "author": "المؤلف",
+    "published": "تاريخ النشر",
+    "search": "البحث في الكتب...",
+    "save": "حفظ",
+    "unsave": "إلغاء الحفظ",
+    "saved": "تم الحفظ",
+    "loading": "جاري تحميل الكتب...",
+    "noBooks": "لم يتم العثور على كتب",
+    "viewDetails": "عرض التفاصيل",
+    "allSubjects": "جميع المواد"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "stats": "الإحصائيات",
+    "progress": "التقدم",
+    "savedItems": "العناصر المحفوظة",
+    "todos": "مهام الدراسة",
+    "welcome": "مرحباً بعودتك، {{name}}!",
+    "welcomeMessage": "واصل رحلة التعلم",
+    "totalCourses": "إجمالي الدورات",
+    "totalBooks": "إجمالي الكتب",
+    "studyStreak": "سلسلة الدراسة",
+    "completedItems": "العناصر المكتملة",
+    "recentActivity": "النشاط الأخير",
+    "noActivity": "لا يوجد نشاط حديث",
+    "learningGoals": "أهداف التعلم",
+    "quickActions": "إجراءات سريعة",
+    "addTodo": "إضافة مهمة جديدة",
+    "todoPlaceholder": "ماذا تريد أن تتعلم؟",
+    "noTodos": "لا توجد مهام بعد. أضف واحدة للبدء!",
+    "results": "تم العثور على {{count}} دورة",
+    "subtitle": "اكتشف وتعلم من مجموعتنا المنسقة من الدورات"
+  },
+  "auth": {
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "name": "الاسم",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "signup": "إنشاء حساب",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "pleaseLogin": "يرجى تسجيل الدخول للمتابعة",
+    "createAccount": "إنشاء حساب",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "rememberMe": "تذكرني",
+    "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "nameRequired": "الاسم مطلوب",
+    "signupSuccess": "تم إنشاء الحساب بنجاح!",
+    "loginSuccess": "تم تسجيل الدخول بنجاح!",
+    "logoutSuccess": "تم تسجيل الخروج بنجاح!",
+    "signupError": "فشل في إنشاء الحساب",
+    "loginError": "فشل في تسجيل الدخول"
+  },
+  "recommendations": {
+    "title": "التوصيات الذكية",
+    "subtitle": "احصل على توصيات تعليمية مخصصة مدعومة بالذكاء الاصطناعي",
+    "dailyRecommendation": "توصية اليوم",
+    "getRecommendation": "احصل على توصية جديدة",
+    "feedback": "التقييم",
+    "helpful": "مفيد",
+    "notHelpful": "غير مفيد",
+    "submitFeedback": "إرسال التقييم",
+    "thankYou": "شكراً لك على تقييمك!",
+    "loading": "جاري الحصول على توصيتك المخصصة...",
+    "noRecommendation": "لا توجد توصية متاحة حالياً",
+    "tryAgain": "حاول مرة أخرى",
+    "whyRecommended": "لماذا أوصي بهذا",
+    "personalizedForYou": "مخصص لك",
+    "feedbackPlaceholder": "أخبرنا المزيد عن تجربتك...",
+    "history": "التوصيات الأخيرة",
+    "tipsTitle": "نصائح للحصول على توصيات أفضل",
+    "tip1": "خذ دورات أو احفظ كتب تجدها مثيرة للاهتمام",
+    "tip2": "أكمل ملفك التعليمي بالمواد التي تستمتع بها",
+    "tip3": "قدم تقييمات على التوصيات لتحسين الاقتراحات",
+    "tip4": "استخدم التطبيق بانتظام لمساعدة الذكاء الاصطناعي على تعلم تفضيلاتك"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "view": "عرض",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "search": "بحث",
+    "filter": "تصفية",
+    "clear": "مسح",
+    "close": "إغلاق",
+    "language": "اللغة",
+    "switchLanguage": "تبديل اللغة",
+    "english": "الإنجليزية",
+    "arabic": "العربية",
+    "confirm": "تأكيد",
+    "yes": "نعم",
+    "no": "لا",
+    "areYouSure": "هل أنت متأكد؟",
+    "pageNotFound": "الصفحة غير موجودة",
+    "goHome": "الذهاب للرئيسية",
+    "somethingWentWrong": "حدث خطأ ما",
+    "tryAgain": "حاول مرة أخرى",
+    "contactSupport": "اتصل بالدعم",
+    "notSpecified": "غير محدد",
+    "add": "إضافة",
+    "days": "أيام",
+    "notFound": "غير موجود"
+  },
+  "subjects": {
+    "math": "الرياضيات",
+    "science": "العلوم",
+    "languages": "اللغات",
+    "programming": "البرمجة",
+    "literature": "الأدب",
+    "history": "التاريخ",
+    "other": "أخرى"
+  },
+  "levels": {
+    "elementary": "الابتدائية",
+    "middleSchool": "المتوسطة",
+    "highSchool": "الثانوية",
+    "university": "الجامعة",
+    "professional": "المهنية",
+    "selfPaced": "ذاتي"
+  },
+  "home": {
+    "hero": {
+      "title": "تعلم بلا حدود",
+      "subtitle": "اكتشف آلاف الدورات والكتب باللغتين العربية والإنجليزية",
+      "ctaCourses": "استكشف الدورات",
+      "ctaBooks": "تصفح الكتب"
+    },
+    "features": {
+      "title": "لماذا تختار EduLearn؟",
+      "subtitle": "كل ما تحتاجه للتعلم الفعال",
+      "bilingual": {
+        "title": "دعم ثنائي اللغة",
+        "description": "تعلم بالعربية أو الإنجليزية مع التبديل السلس بين اللغات"
+      },
+      "courses": {
+        "title": "دورات عالية الجودة",
+        "description": "محتوى منظم من أفضل المؤسسات التعليمية"
+      },
+      "community": {
+        "title": "تعلم معاً",
+        "description": "انضم إلى مجتمع المتعلمين وشارك تقدمك"
+      },
+      "ai": {
+        "title": "توصيات ذكية",
+        "description": "احصل على اقتراحات تعليمية مخصصة مدعومة بالذكاء الاصطناعي"
+      }
+    },
+    "cta": {
+      "title": "مستعد لبدء التعلم؟",
+      "subtitle": "انضم إلى آلاف المتعلمين وابدأ رحلتك التعليمية اليوم",
+      "button": "ابدأ مجاناً"
+    }
+  },
+  "pageNotFound": {
+    "message": "الصفحة التي تبحث عنها قد تكون قد تمت إزالتها أو تم تغيير اسمها أو أنها غير متاحة مؤقتاً.",
+    "tryThese": "أو جرب إحدى هذه الصفحات الشائعة"
+  }
+}
