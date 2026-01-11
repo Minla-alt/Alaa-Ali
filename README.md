@@ -261,5 +261,5 @@ npm run seed
 *نحو تعليم أفضل للجميع*
 
 [الموقع الإلكتروني](https://your-domain.com) • [التوثيق](https://docs.your-domain.com) • [الدعم](mailto:support@your-domain.com)
-
+npm start
 </div>
