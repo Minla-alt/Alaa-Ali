@@ -4,6 +4,7 @@
     "courses": "الدورات",
     "books": "الكتب",
     "dashboard": "لوحة التحكم",
+    "ai-recommendations": "التوصيات الذكية",
     "login": "تسجيل الدخول",
     "signup": "إنشاء حساب",
     "logout": "تسجيل الخروج"
@@ -163,25 +164,84 @@
   "recommendations": {
     "title": "التوصيات الذكية",
     "subtitle": "احصل على توصيات تعليمية مخصصة مدعومة بالذكاء الاصطناعي",
-    "dailyRecommendation": "توصية اليوم",
-    "getRecommendation": "احصل على توصية جديدة",
-    "feedback": "التقييم",
+    "dailyRecommendation": "توصية التعلم اليومية",
+    "personalizedForYou": "مخصص لك",
+    "getRecommendation": "احصل على توصية أخرى",
+    "startLearning": "ابدأ التعلم",
+    "saveForLater": "احفظ للمتابعة",
+    "unsave": "إلغاء الحفظ",
+    "saved": "محفوظ",
+    "feedback": "هل كانت مفيدة؟",
     "helpful": "مفيد",
     "notHelpful": "غير مفيد",
     "submitFeedback": "إرسال التقييم",
     "thankYou": "شكراً لك على تقييمك!",
     "loading": "جاري الحصول على توصيتك المخصصة...",
-    "noRecommendation": "لا توجد توصية متاحة حالياً",
+    "noRecommendation": "لا توجد توصيات متاحة. تحقق لاحقاً!",
     "tryAgain": "حاول مرة أخرى",
-    "whyRecommended": "لماذا أوصي بهذا",
-    "personalizedForYou": "مخصص لك",
+    "whyRecommended": "لماذا هذه التوصية؟",
     "feedbackPlaceholder": "أخبرنا المزيد عن تجربتك...",
     "history": "التوصيات الأخيرة",
+    "viewAll": "عرض كل التاريخ",
     "tipsTitle": "نصائح للحصول على توصيات أفضل",
     "tip1": "خذ دورات أو احفظ كتب تجدها مثيرة للاهتمام",
     "tip2": "أكمل ملفك التعليمي بالمواد التي تستمتع بها",
     "tip3": "قدم تقييمات على التوصيات لتحسين الاقتراحات",
-    "tip4": "استخدم التطبيق بانتظام لمساعدة الذكاء الاصطناعي على تعلم تفضيلاتك"
+    "tip4": "استخدم التطبيق بانتظام لمساعدة الذكاء الاصطناعي على تعلم تفضيلاتك",
+    "preferences": {
+      "title": "التفضيلات",
+      "timeAvailable": "الوقت المتاح",
+      "timeOptions": {
+        "15": "15 دقيقة",
+        "30": "30 دقيقة", 
+        "60": "ساعة واحدة",
+        "120": "ساعتان أو أكثر"
+      },
+      "subject": "المادة",
+      "subjectAll": "جميع المواد",
+      "contentType": "نوع المحتوى",
+      "preferCourses": "أفضل الدورات",
+      "preferBooks": "أفضل الكتب",
+      "preferBoth": "أفضل الكل"
+    },
+    "stats": {
+      "title": "إحصائيات التعلم الخاصة بك",
+      "savedItems": "العناصر المحفوظة",
+      "averageProgress": "متوسط التقدم",
+      "learningStreak": "متتالية التعلم",
+      "days": "أيام"
+    },
+    "error": {
+      "networkError": "خطأ في الشبكة. يرجى التحقق من الاتصال.",
+      "serverError": "خطأ في الخادم. يرجى المحاولة لاحقاً.",
+      "noRecommendationAvailable": "لا توجد توصية متاحة حالياً.",
+      "feedbackFailed": "فشل في إرسال التقييم. يرجى المحاولة مرة أخرى.",
+      "saveFailed": "فشل في حفظ العنصر. يرجى المحاولة مرة أخرى."
+    },
+    "success": {
+      "feedbackSubmitted": "تم إرسال التقييم بنجاح!",
+      "itemSaved": "تم حفظ العنصر في مكتبتك!",
+      "itemUnsaved": "تم إزالة العنصر من مكتبتك!"
+    },
+    "timeEstimates": {
+      "minutes": "{{count}} دقيقة",
+      "hours": "{{count}} ساعة",
+      "hour": "ساعة واحدة"
+    },
+    "levels": {
+      "beginner": "مبتدئ",
+      "intermediate": "متوسط", 
+      "advanced": "متقدم"
+    },
+    "sources": {
+      "khanAcademy": "أكاديمية خان",
+      "mit": "معهد ماساتشوستس",
+      "stanford": "ستانفورد",
+      "coursera": "كورسيرا",
+      "edx": "إي دي إكس",
+      "udemy": "يودمي",
+      "other": "أخرى"
+    }
   },
   "common": {
     "loading": "جاري التحميل...",
