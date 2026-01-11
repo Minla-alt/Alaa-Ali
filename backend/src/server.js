@@ -29,13 +29,15 @@ app.use(helmet());
  */
 const limiter = rateLimit({
   windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
-  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100, // limit each IP to 100 requests per windowMs
+  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || (process.env.NODE_ENV === 'production' ? 500 : 100), 
   message: {
     error: 'Too many requests from this IP, please try again later.',
     retryAfter: '15 minutes'
   },
   standardHeaders: true,
   legacyHeaders: false,
+  // Skip rate limiting for health checks in production
+  skip: (req) => process.env.NODE_ENV === 'production' && req.path === '/api/health'
 });
 
 app.use('/api/', limiter);
@@ -43,13 +45,28 @@ app.use('/api/', limiter);
 /**
  * CORS Configuration
  */
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://yourdomain.com'] 
-    : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173', 'http://localhost:5000'],
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = process.env.NODE_ENV === 'production' 
+      ? (process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [])
+      : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173', 'http://localhost:5000'];
+    
+    if (allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+    
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
-  optionsSuccessStatus: 200
-}));
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-client-info']
+};
+
+app.use(cors(corsOptions));
 
 /**
  * Body Parsing Middleware
@@ -61,7 +78,9 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
  * Request Logging Middleware
  */
 app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.path} - IP: ${req.ip}`);
+  }
   next();
 });
 
@@ -201,7 +220,16 @@ app.use('/api/*', (req, res) => {
 
 // Global error handler
 app.use((error, req, res, next) => {
-  console.error('Global error handler:', error);
+  // Skip logging in test environment
+  if (process.env.NODE_ENV !== 'test') {
+    console.error('Global error handler:', {
+      message: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : 'Stack trace hidden in production',
+      url: req.originalUrl,
+      method: req.method,
+      ip: req.ip
+    });
+  }
   
   // Mongoose validation error
   if (error.name === 'ValidationError') {
@@ -232,10 +260,35 @@ app.use((error, req, res, next) => {
     });
   }
   
+  // JWT errors
+  if (error.name === 'JsonWebTokenError') {
+    return res.status(401).json({
+      error: 'Authentication Error',
+      message: 'Invalid token'
+    });
+  }
+  
+  if (error.name === 'TokenExpiredError') {
+    return res.status(401).json({
+      error: 'Authentication Error',
+      message: 'Token expired'
+    });
+  }
+  
+  // CORS errors
+  if (error.message && error.message.includes('CORS')) {
+    return res.status(403).json({
+      error: 'CORS Error',
+      message: 'Cross-origin requests are not allowed'
+    });
+  }
+  
   // Default error
-  res.status(500).json({
+  const status = error.status || error.statusCode || 500;
+  res.status(status).json({
     error: 'Internal Server Error',
-    message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
+    message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong',
+    ...(process.env.NODE_ENV === 'development' && { stack: error.stack })
   });
 });
 
