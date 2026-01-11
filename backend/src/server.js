@@ -13,6 +13,8 @@ require('./models/Book');
 require('./models/Progress');
 require('./models/StudyTodo');
 require('./models/SavedContent');
+require('./models/Recommendation');
+require('./models/RecommendationFeedback');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -96,6 +98,7 @@ const authRoutes = require('./routes/auth');
 const coursesRoutes = require('./routes/courses');
 const booksRoutes = require('./routes/books');
 const dashboardRoutes = require('./routes/dashboard');
+const recommendationsRoutes = require('./routes/recommendations');
 
 // Mount authentication routes
 app.use('/api/auth', authRoutes);
@@ -108,6 +111,9 @@ app.use('/api/books', booksRoutes);
 
 // Mount dashboard routes
 app.use('/api/dashboard', dashboardRoutes);
+
+// Mount recommendations routes
+app.use('/api/recommendations', recommendationsRoutes);
 
 // Basic API info endpoint
 app.get('/api', (req, res) => {
@@ -148,6 +154,10 @@ app.get('/api', (req, res) => {
           delete: 'DELETE /api/dashboard/todos/:todoId'
         },
         updateProgress: 'PATCH /api/dashboard/progress/:contentId'
+      },
+      recommendations: {
+        daily: 'GET /api/recommendations/daily',
+        feedback: 'POST /api/recommendations/feedback'
       }
     }
   });
@@ -182,7 +192,9 @@ app.use('/api/*', (req, res) => {
       'POST /api/dashboard/todos',
       'PATCH /api/dashboard/todos/:todoId',
       'DELETE /api/dashboard/todos/:todoId',
-      'PATCH /api/dashboard/progress/:contentId'
+      'PATCH /api/dashboard/progress/:contentId',
+      'GET /api/recommendations/daily',
+      'POST /api/recommendations/feedback'
     ]
   });
 });
