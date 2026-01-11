@@ -46,7 +46,7 @@ app.use('/api/', limiter);
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? ['https://yourdomain.com'] 
-    : ['http://localhost:3000', 'http://localhost:3001'],
+    : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173', 'http://localhost:5000'],
   credentials: true,
   optionsSuccessStatus: 200
 }));
@@ -68,7 +68,7 @@ app.use((req, res, next) => {
 /**
  * Health Check Endpoint
  */
-app.get('/health', (req, res) => {
+app.get('/api/health', (req, res) => {
   const dbStates = {
     0: 'Disconnected',
     1: 'Connected',
@@ -122,7 +122,7 @@ app.get('/api', (req, res) => {
     version: '1.0.0',
     documentation: '/api/docs',
     endpoints: {
-      health: '/health',
+      health: '/api/health',
       auth: {
         signup: 'POST /api/auth/signup',
         login: 'POST /api/auth/login',
