@@ -93,9 +93,17 @@ app.get('/health', (req, res) => {
  * API Routes
  */
 const authRoutes = require('./routes/auth');
+const coursesRoutes = require('./routes/courses');
+const booksRoutes = require('./routes/books');
 
 // Mount authentication routes
 app.use('/api/auth', authRoutes);
+
+// Mount courses routes
+app.use('/api/courses', coursesRoutes);
+
+// Mount books routes
+app.use('/api/books', booksRoutes);
 
 // Basic API info endpoint
 app.get('/api', (req, res) => {
@@ -128,7 +136,21 @@ app.use('/api/*', (req, res) => {
     message: `The endpoint ${req.method} ${req.path} does not exist`,
     availableEndpoints: [
       'GET /api',
-      'GET /health'
+      'GET /health',
+      'GET /api/auth/me',
+      'POST /api/auth/signup',
+      'POST /api/auth/login',
+      'POST /api/auth/logout',
+      'GET /api/courses',
+      'GET /api/courses/:id',
+      'POST /api/courses/:id/save',
+      'DELETE /api/courses/:id/save',
+      'GET /api/courses/user/saved',
+      'GET /api/books',
+      'GET /api/books/:id',
+      'POST /api/books/:id/save',
+      'DELETE /api/books/:id/save',
+      'GET /api/books/user/saved'
     ]
   });
 });
