@@ -195,12 +195,13 @@ npm run seed
 ## 🌐 النشر على Railway
 
 راجع [DEPLOYMENT.md](./DEPLOYMENT.md) للحصول على دليل شامل للنشر على Railway.
+راجع [FRONTEND_DEPLOYMENT.md](./FRONTEND_DEPLOYMENT.md) للحصول على تفاصيل محددة لنشر واجهة المستخدم.
 
 ### خطوات سريعة:
 1. إعداد MongoDB Atlas
 2. نشر Backend على Railway
-3. نشر Frontend على Railway  
-4. تكوين متغيرات البيئة
+3. نشر Frontend على Railway (استخدم `frontend/Dockerfile`)
+4. تكوين متغيرات البيئة (`VITE_API_BASE_URL`)
 5. اختبار شامل
 
 ## 📚 الوثائق الإضافية

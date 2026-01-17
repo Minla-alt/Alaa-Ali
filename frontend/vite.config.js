@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  base: '/',
   server: {
     port: 3000,
     proxy: {
@@ -21,11 +22,13 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'terser',
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          i18n: ['react-i18next', 'i18next']
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          i18n: ['react-i18next', 'i18next', 'i18next-browser-languagedetector'],
+          icons: ['lucide-react']
         }
       }
     }
