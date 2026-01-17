@@ -11,6 +11,29 @@
 - **🔐 نظام المصادقة**: تسجيل آمن مع JWT tokens
 - **📱 تصميم متجاوب**: يعمل على جميع الأجهزة
 
+## 🚀 النشر على Railway
+
+### النشر الشامل (مستحسن)
+```bash
+# النشر الكامل للمنصة على Railway
+# راجع: RAILWAY_DEPLOYMENT.md
+```
+
+### الروابط الحية
+```
+🚀 التطبيق المباشر: https://your-frontend-app.railway.app
+🔧 API Backend: https://your-backend-app.railway.app
+```
+
+### الخطوات السريعة
+1. أنشئ مشروع Railway جديد
+2. أضف Backend service مع متغيرات البيئة
+3. أضف Frontend service مع API URL
+4. اربط Backend و Frontend
+5. اختبر التطبيق
+
+📖 **دليل شامل**: [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md)
+
 ## 🛠️ التقنيات المستخدمة
 
 ### Backend

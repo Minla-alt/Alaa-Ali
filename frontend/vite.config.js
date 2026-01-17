@@ -6,12 +6,12 @@ export default defineConfig({
   base: '/',
   server: {
     port: 3000,
-    proxy: {
+    proxy: process.env.NODE_ENV === 'development' ? {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'http://localhost:3001',
         changeOrigin: true,
       }
-    }
+    } : undefined
   },
   resolve: {
     alias: {

@@ -52,7 +52,7 @@ const corsOptions = {
     
     const allowedOrigins = process.env.NODE_ENV === 'production' 
       ? (process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [])
-      : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173', 'http://localhost:5000'];
+      : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'];
     
     if (allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
       return callback(null, true);
@@ -325,22 +325,31 @@ const startServer = async () => {
     
     // Start Express server
     const server = app.listen(PORT, () => {
+      const isProduction = process.env.NODE_ENV === 'production';
+      const baseUrl = isProduction && process.env.RAILWAY_PUBLIC_DOMAIN 
+        ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
+        : `http://localhost:${PORT}`;
+      
       console.log('\n🚀 ' + '='.repeat(50));
       console.log(`   الخادم يعمل على المنفذ ${PORT}`);
       console.log(`   البيئة: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`   🌐 API Base URL: http://localhost:${PORT}`);
-      console.log(`   🏥 فحص الحالة: http://localhost:${PORT}/api/health`);
-      console.log(`   📊 معلومات API: http://localhost:${PORT}/api`);
-      console.log(`   🚀 قائمة الدورات: http://localhost:${PORT}/api/courses`);
-      console.log(`   📚 قائمة الكتب: http://localhost:${PORT}/api/books`);
+      console.log(`   🌐 API Base URL: ${baseUrl}`);
+      console.log(`   🏥 فحص الحالة: ${baseUrl}/api/health`);
+      console.log(`   📊 معلومات API: ${baseUrl}/api`);
+      console.log(`   🚀 قائمة الدورات: ${baseUrl}/api/courses`);
+      console.log(`   📚 قائمة الكتب: ${baseUrl}/api/books`);
       console.log('🚀 ' + '='.repeat(50));
       
-      if (process.env.NODE_ENV === 'development') {
+      if (isProduction) {
+        console.log('\n🌟 التطبيق منشور في بيئة الإنتاج');
+        console.log(`   • تم النشر على: ${baseUrl}`);
+        console.log('   • راقب الأداء في Railway Dashboard');
+      } else {
         console.log('\n📚 للاستخدام في التطوير:');
         console.log('   • قم بإعداد MongoDB Atlas أولاً (راجع MONGODB_SETUP.md)');
         console.log('   • تأكد من ملف .env يحتوي على MONGODB_URI صحيح');
         console.log('   • لزرع البيانات: npm run seed');
-        console.log('   • لفحص قاعدة البيانات: http://localhost:' + PORT + '/api/health');
+        console.log(`   • لفحص قاعدة البيانات: ${baseUrl}/api/health`);
       }
     });
     
