@@ -75,6 +75,13 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 /**
+ * Preview access gate (staging protection)
+ * Active only when PREVIEW_PASSWORD is set: requires an HttpOnly cookie for
+ * all pages and API calls, and adds noindex headers. Inert otherwise.
+ */
+app.use(require('./middleware/previewGate'));
+
+/**
  * Request Logging Middleware
  */
 app.use((req, res, next) => {
@@ -235,6 +242,20 @@ app.use('/api/*', (req, res) => {
     ]
   });
 });
+
+/**
+ * Serve the built frontend (single-service deployment)
+ * Active only when backend/public exists (created by the production build).
+ */
+const path = require('path');
+const fs = require('fs');
+const publicDir = path.join(__dirname, '..', 'public');
+if (fs.existsSync(path.join(publicDir, 'index.html'))) {
+  app.use(express.static(publicDir));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(publicDir, 'index.html'));
+  });
+}
 
 // Global error handler
 app.use((error, req, res, next) => {
