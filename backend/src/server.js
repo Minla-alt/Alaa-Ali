@@ -146,6 +146,10 @@ const coursesRoutes = require('./routes/courses');
 const booksRoutes = require('./routes/books');
 const dashboardRoutes = require('./routes/dashboard');
 const recommendationsRoutes = require('./routes/recommendations');
+const adminRoutes = require('./routes/admin');
+
+// Mount admin routes (admin role required)
+app.use('/api/admin', adminRoutes);
 
 // Mount authentication routes
 app.use('/api/auth', authRoutes);
