@@ -33,8 +33,8 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Education level is required'],
     enum: {
-      values: ['HighSchool', 'University', 'SelfPaced'],
-      message: 'Education level must be one of: HighSchool, University, SelfPaced'
+      values: ['Beginner', 'HighSchool', 'University', 'SelfPaced'],
+      message: 'Education level must be one of: Beginner, HighSchool, University, SelfPaced'
     }
   },
   language: {
