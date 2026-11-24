@@ -44,6 +44,7 @@ const CoursesPage = () => {
 
   const levels = [
     { value: '', label: t('courses.allLevels') },
+    { value: 'Beginner', label: t('levels.beginnerAll') },
     { value: 'HighSchool', label: t('levels.highSchool') },
     { value: 'University', label: t('levels.university') },
     { value: 'SelfPaced', label: t('levels.selfPaced') }
