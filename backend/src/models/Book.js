@@ -51,6 +51,10 @@ const bookSchema = new mongoose.Schema({
     trim: true,
     maxlength: [100, 'Source cannot exceed 100 characters']
   },
+  order: {
+    type: Number,
+    default: 999
+  },
   sourceUrl: {
     type: String,
     trim: true,
