@@ -35,11 +35,11 @@ const getAllBooks = async (req, res) => {
     }
 
     if (educationLevel) {
-      const validLevels = ['HighSchool', 'University', 'SelfPaced'];
+      const validLevels = ['Beginner', 'HighSchool', 'University', 'SelfPaced'];
       if (!validLevels.includes(educationLevel)) {
         return res.status(400).json({
           success: false,
-          message: 'Invalid education level. Must be one of: HighSchool, University, SelfPaced'
+          message: 'Invalid education level. Must be one of: Beginner, HighSchool, University, SelfPaced'
         });
       }
       query.educationLevel = educationLevel;
