@@ -34,6 +34,7 @@ const Navbar = () => {
     { key: 'books', path: '/books', requiresAuth: false },
     { key: 'dashboard', path: '/dashboard', requiresAuth: true },
     { key: 'ai-recommendations', path: '/ai-recommendations', requiresAuth: true },
+    ...(user?.role === 'admin' ? [{ key: 'admin', path: '/admin', requiresAuth: true }] : []),
   ];
 
   return (
