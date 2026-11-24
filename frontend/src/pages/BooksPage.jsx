@@ -85,7 +85,7 @@ const BooksPage = () => {
   };
 
   const books = booksData?.books || [];
-  const totalBooks = booksData?.total || 0;
+  const totalBooks = booksData?.pagination?.total ?? booksData?.total ?? 0;
   const totalPages = Math.ceil(totalBooks / itemsPerPage);
 
   return (

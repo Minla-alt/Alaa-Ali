@@ -193,7 +193,7 @@
       "timeAvailable": "Time Available",
       "timeOptions": {
         "15": "15 minutes",
-        "30": "30 minutes", 
+        "30": "30 minutes",
         "60": "1 hour",
         "120": "2+ hours"
       },
@@ -230,7 +230,7 @@
     },
     "levels": {
       "beginner": "Beginner",
-      "intermediate": "Intermediate", 
+      "intermediate": "Intermediate",
       "advanced": "Advanced"
     },
     "sources": {
@@ -306,7 +306,13 @@
     "highSchool": "High School",
     "university": "University",
     "professional": "Professional",
-    "selfPaced": "Self-Paced"
+    "selfPaced": "Self-Paced",
+    "HighSchool": "High School",
+    "MiddleSchool": "Middle School",
+    "Elementary": "Elementary",
+    "University": "University",
+    "Professional": "Professional",
+    "SelfPaced": "Self-Paced"
   },
   "home": {
     "hero": {

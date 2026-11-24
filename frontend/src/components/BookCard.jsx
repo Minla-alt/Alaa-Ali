@@ -5,6 +5,7 @@ import { Book, User, Calendar, Heart, Globe } from 'lucide-react';
 
 const BookCard = ({ book, onSave, onUnsave, isSaved }) => {
   const { t, i18n } = useTranslation();
+  const [imgError, setImgError] = React.useState(false);
   const isRtl = i18n.language === 'ar';
 
   const handleSaveClick = (e) => {
@@ -21,10 +22,11 @@ const BookCard = ({ book, onSave, onUnsave, isSaved }) => {
     <div className="group bg-white rounded-xl shadow-sm border border-secondary-200 overflow-hidden hover:shadow-md transition-all duration-300 flex flex-col h-full">
       {/* Cover */}
       <Link to={`/books/${book._id}`} className="relative h-64 overflow-hidden bg-secondary-100">
-        {book.coverImage ? (
+        {book.coverImage && !imgError ? (
           <img
             src={book.coverImage}
             alt={book.title}
+            onError={() => setImgError(true)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (

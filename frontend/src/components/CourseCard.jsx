@@ -6,6 +6,7 @@ import { Clock, BookOpen, User, Heart } from 'lucide-react';
 const CourseCard = ({ course, onSave, onUnsave, isSaved }) => {
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === 'ar';
+  const [imgError, setImgError] = React.useState(false);
 
   const handleSaveClick = (e) => {
     e.preventDefault();
@@ -31,10 +32,11 @@ const CourseCard = ({ course, onSave, onUnsave, isSaved }) => {
     <div className="group bg-white rounded-xl shadow-sm border border-secondary-200 overflow-hidden hover:shadow-md transition-all duration-300 flex flex-col h-full">
       {/* Thumbnail */}
       <Link to={`/courses/${course._id}`} className="relative h-48 overflow-hidden bg-secondary-100">
-        {course.thumbnail ? (
+        {course.thumbnail && !imgError ? (
           <img
             src={course.thumbnail}
             alt={course.title}
+            onError={() => setImgError(true)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (

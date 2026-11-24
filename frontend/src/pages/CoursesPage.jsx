@@ -94,7 +94,7 @@ const CoursesPage = () => {
   };
 
   const courses = coursesData?.courses || [];
-  const totalCourses = coursesData?.total || 0;
+  const totalCourses = coursesData?.pagination?.total ?? coursesData?.total ?? 0;
   const totalPages = Math.ceil(totalCourses / itemsPerPage);
 
   return (

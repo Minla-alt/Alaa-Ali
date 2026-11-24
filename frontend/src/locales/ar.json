@@ -193,7 +193,7 @@
       "timeAvailable": "الوقت المتاح",
       "timeOptions": {
         "15": "15 دقيقة",
-        "30": "30 دقيقة", 
+        "30": "30 دقيقة",
         "60": "ساعة واحدة",
         "120": "ساعتان أو أكثر"
       },
@@ -230,7 +230,7 @@
     },
     "levels": {
       "beginner": "مبتدئ",
-      "intermediate": "متوسط", 
+      "intermediate": "متوسط",
       "advanced": "متقدم"
     },
     "sources": {
@@ -306,7 +306,13 @@
     "highSchool": "الثانوية",
     "university": "الجامعة",
     "professional": "المهنية",
-    "selfPaced": "ذاتي"
+    "selfPaced": "ذاتي",
+    "HighSchool": "الثانوية",
+    "MiddleSchool": "المتوسطة",
+    "Elementary": "الابتدائية",
+    "University": "الجامعة",
+    "Professional": "المهنية",
+    "SelfPaced": "ذاتي"
   },
   "home": {
     "hero": {
