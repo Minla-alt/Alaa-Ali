@@ -77,7 +77,7 @@ const getAllBooks = async (req, res) => {
 
     // Execute query with pagination
     const books = await Book.find(query)
-      .sort({ publicationYear: -1, createdAt: -1 })
+      .sort({ order: 1, publicationYear: -1, createdAt: -1 })
       .skip(skip)
       .limit(limitNum);
 
