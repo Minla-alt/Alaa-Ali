@@ -180,6 +180,7 @@ const login = async (req, res) => {
       email: user.email,
       name: user.name,
       language: user.language,
+      role: user.role,
       token
     });
   } catch (error) {
