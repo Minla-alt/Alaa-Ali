@@ -15,7 +15,8 @@ const BooksPage = () => {
   const [filters, setFilters] = useState({
     search: '',
     subject: '',
-    language: ''
+    language: '',
+    educationLevel: ''
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
@@ -31,6 +32,14 @@ const BooksPage = () => {
     }),
     [filters, currentPage]
   );
+
+  const levels = [
+    { value: '', label: t('courses.allLevels') },
+    { value: 'Beginner', label: t('levels.beginnerAll') },
+    { value: 'HighSchool', label: t('levels.highSchool') },
+    { value: 'University', label: t('levels.university') },
+    { value: 'SelfPaced', label: t('levels.selfPaced') }
+  ];
 
   const subjects = [
     { value: '', label: t('courses.allSubjects') },
@@ -57,7 +66,8 @@ const BooksPage = () => {
     setFilters({
       search: '',
       subject: '',
-      language: ''
+      language: '',
+      educationLevel: ''
     });
     setCurrentPage(1);
   };
@@ -121,6 +131,7 @@ const BooksPage = () => {
             onFilterChange={handleFilterChange}
             onClearFilters={handleClearFilters}
             subjects={subjects}
+            levels={levels}
             languages={languages}
             isOpen={isFilterDrawerOpen}
             onClose={() => setIsFilterDrawerOpen(false)}
