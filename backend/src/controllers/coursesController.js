@@ -35,11 +35,11 @@ const getAllCourses = async (req, res) => {
     }
 
     if (educationLevel) {
-      const validLevels = ['HighSchool', 'University', 'SelfPaced'];
+      const validLevels = ['Beginner', 'HighSchool', 'University', 'SelfPaced'];
       if (!validLevels.includes(educationLevel)) {
         return res.status(400).json({
           success: false,
-          message: 'Invalid education level. Must be one of: HighSchool, University, SelfPaced'
+          message: 'Invalid education level. Must be one of: Beginner, HighSchool, University, SelfPaced'
         });
       }
       query.educationLevel = educationLevel;
@@ -75,7 +75,7 @@ const getAllCourses = async (req, res) => {
 
     // Execute query with pagination
     const courses = await Course.find(query)
-      .sort({ createdAt: -1 })
+      .sort({ order: 1, createdAt: -1 })
       .skip(skip)
       .limit(limitNum);
 
