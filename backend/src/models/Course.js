@@ -28,8 +28,8 @@ const courseSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Education level is required'],
     enum: {
-      values: ['HighSchool', 'University', 'SelfPaced'],
-      message: 'Education level must be one of: HighSchool, University, SelfPaced'
+      values: ['Beginner', 'HighSchool', 'University', 'SelfPaced'],
+      message: 'Education level must be one of: Beginner, HighSchool, University, SelfPaced'
     }
   },
   language: {
@@ -45,6 +45,11 @@ const courseSchema = new mongoose.Schema({
     required: [true, 'Source is required'],
     trim: true,
     maxlength: [100, 'Source cannot exceed 100 characters']
+  },
+  // Position in a learning path (lower comes first). Unordered items go last.
+  order: {
+    type: Number,
+    default: 999
   },
   sourceUrl: {
     type: String,
