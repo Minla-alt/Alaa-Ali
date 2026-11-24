@@ -58,9 +58,9 @@ export const AuthProvider = ({ children }) => {
       setIsLoading(true);
       const response = await authAPI.login(credentials);
       
-      const { token, userId, email, name, language } = response;
+      const { token, userId, email, name, language, role } = response;
       // Backend returns a flat object; build the user from it
-      const userData = response.user || { id: userId, _id: userId, userId, email, name, language };
+      const userData = response.user || { id: userId, _id: userId, userId, email, name, language, role };
       
       // Store auth data
       localStorage.setItem('authToken', token);
