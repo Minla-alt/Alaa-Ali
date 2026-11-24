@@ -31,10 +31,12 @@ const CourseDetailPage = () => {
   const [isSaved, setIsSaved] = useState(false);
   const [saving, setSaving] = useState(false);
 
-  const { data: course, loading, error, fetchData } = useApi(
+  const { data: courseResponse, loading, error, fetchData } = useApi(
     () => coursesAPI.getCourseById(id),
     [id]
   );
+  // API returns { success, course }; unwrap it
+  const course = courseResponse?.course || null;
 
   const { data: relatedData, loading: loadingRelated } = useApi(
     () => course ? coursesAPI.getCourses({ subject: course.subject, limit: 3 }) : Promise.resolve({ courses: [] }),
@@ -111,7 +113,7 @@ const CourseDetailPage = () => {
             <div className="order-2 lg:order-1">
               <div className="flex flex-wrap gap-2 mb-6">
                 <span className="px-3 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-bold uppercase tracking-wider">
-                  {t(`subjects.${course.subject.toLowerCase()}`)}
+                  {t(`subjects.${(course.subject || '').toLowerCase()}`)}
                 </span>
                 <span className="px-3 py-1 rounded-full bg-secondary-100 text-secondary-700 text-xs font-bold uppercase tracking-wider">
                   {t(`levels.${course.educationLevel}`)}
@@ -131,7 +133,8 @@ const CourseDetailPage = () => {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <a
+                {course.sourceUrl && (
+<a
                   href={course.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -140,6 +143,7 @@ const CourseDetailPage = () => {
                   <span>{t('courses.startLearning')}</span>
                   <ExternalLink className={`w-5 h-5 ${isRtl ? 'mr-3' : 'ml-3'} group-hover:scale-110 transition-transform`} />
                 </a>
+)}
                 
                 <button
                   onClick={handleToggleSave}
