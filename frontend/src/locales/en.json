@@ -4,7 +4,8 @@
     "courses": "Courses",
     "books": "Books",
     "dashboard": "Dashboard",
-    "ai-recommendations": "AI Recommendations",
+    "ai-recommendations": "Suggestions",
+    "admin": "Admin",
     "login": "Login",
     "signup": "Sign Up",
     "logout": "Logout"
