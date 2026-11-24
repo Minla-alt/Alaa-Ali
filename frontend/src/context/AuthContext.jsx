@@ -23,14 +23,18 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('authToken');
         const userData = localStorage.getItem('user');
 
-        if (token && userData) {
+        if (token && userData && userData !== 'undefined') {
           setUser(JSON.parse(userData));
           setIsAuthenticated(true);
           
           // Verify token is still valid
           try {
             const response = await authAPI.getMe();
-            setUser(response.user);
+            const me = response.user ? { ...response.user, id: response.user.userId, _id: response.user.userId } : null;
+            if (me) {
+              setUser(me);
+              localStorage.setItem('user', JSON.stringify(me));
+            }
           } catch (error) {
             // Token is invalid, clear auth data
             localStorage.removeItem('authToken');
@@ -54,7 +58,9 @@ export const AuthProvider = ({ children }) => {
       setIsLoading(true);
       const response = await authAPI.login(credentials);
       
-      const { token, user: userData } = response;
+      const { token, userId, email, name, language } = response;
+      // Backend returns a flat object; build the user from it
+      const userData = response.user || { id: userId, _id: userId, userId, email, name, language };
       
       // Store auth data
       localStorage.setItem('authToken', token);
@@ -80,7 +86,14 @@ export const AuthProvider = ({ children }) => {
       setIsLoading(true);
       const response = await authAPI.signup(userData);
       
-      const { token, user: newUser } = response;
+      const { token, userId } = response;
+      // Backend signup returns only userId + token; use the submitted details
+      const newUser = response.user || {
+        id: userId, _id: userId, userId,
+        email: String(userData.email || '').toLowerCase(),
+        name: userData.name,
+        language: userData.language || 'en'
+      };
       
       // Store auth data
       localStorage.setItem('authToken', token);
