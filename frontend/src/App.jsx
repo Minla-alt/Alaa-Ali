@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 // Import pages
 import Home from './pages/Home';
+import AdminPage from './pages/AdminPage';
 import CoursesPage from './pages/CoursesPage';
 import CourseDetailPage from './pages/CourseDetailPage';
 import BooksPage from './pages/BooksPage';
@@ -64,6 +65,12 @@ function App() {
                 </ProtectedRoute>
               } />
               
+              <Route path="/admin" element={
+                <ProtectedRoute>
+                  <AdminPage />
+                </ProtectedRoute>
+              } />
+
               {/* Catch all route */}
               <Route path="*" element={<PageNotFound />} />
             </Routes>
