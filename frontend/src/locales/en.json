@@ -329,19 +329,19 @@
       "subtitle": "Everything you need for effective learning",
       "bilingual": {
         "title": "Bilingual Support",
-        "description": "Learn in Arabic or English with seamless language switching"
+        "description": "Switch the site between Arabic and English. Most course content is in English."
       },
       "courses": {
         "title": "Quality Courses",
-        "description": "Curated content from top educational institutions"
+        "description": "Free courses and books from sources like Khan Academy, MIT and Harvard"
       },
       "community": {
         "title": "Learn Together",
-        "description": "Join a community of learners and share your progress"
+        "description": "Save courses and books and keep track of your own progress"
       },
       "ai": {
-        "title": "AI Recommendations",
-        "description": "Get personalized learning suggestions powered by AI"
+        "title": "Suggestions",
+        "description": "Get course and book suggestions to explore next"
       }
     },
     "cta": {
