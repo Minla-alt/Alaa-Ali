@@ -43,6 +43,22 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 /**
+ * Body Parsing Middleware
+ */
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+/**
+ * Preview access gate (staging protection)
+ * Active only when PREVIEW_PASSWORD is set: requires an HttpOnly cookie for
+ * all pages and API calls, and adds noindex headers. Inert otherwise.
+ * Runs BEFORE the CORS middleware so the same-origin gate form POST cannot be
+ * rejected by strict origin string-matching (browser form navigations do not
+ * always send an Origin that string-matches CORS_ORIGIN).
+ */
+app.use(require('./middleware/previewGate'));
+
+/**
  * CORS Configuration
  */
 const corsOptions = {
@@ -67,19 +83,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-/**
- * Body Parsing Middleware
- */
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
-/**
- * Preview access gate (staging protection)
- * Active only when PREVIEW_PASSWORD is set: requires an HttpOnly cookie for
- * all pages and API calls, and adds noindex headers. Inert otherwise.
- */
-app.use(require('./middleware/previewGate'));
 
 /**
  * Request Logging Middleware
