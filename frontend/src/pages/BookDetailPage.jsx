@@ -31,10 +31,12 @@ const BookDetailPage = () => {
   const [isSaved, setIsSaved] = useState(false);
   const [saving, setSaving] = useState(false);
 
-  const { data: book, loading, error, fetchData } = useApi(
+  const { data: bookResponse, loading, error, fetchData } = useApi(
     () => booksAPI.getBookById(id),
     [id]
   );
+  // API returns { success, book }; unwrap it
+  const book = bookResponse?.book || null;
 
   const { data: relatedData, loading: loadingRelated } = useApi(
     () => book ? booksAPI.getBooks({ subject: book.subject, limit: 3 }) : Promise.resolve({ books: [] }),
@@ -110,7 +112,8 @@ const BookDetailPage = () => {
               </div>
               
               <div className="mt-8 space-y-4">
-                <a
+                {book.sourceUrl && (
+<a
                   href={book.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -120,6 +123,7 @@ const BookDetailPage = () => {
                   <span>{t('books.readOnline')}</span>
                   <ExternalLink className={`w-4 h-4 ${isRtl ? 'mr-2' : 'ml-2'} opacity-0 group-hover:opacity-100 transition-opacity`} />
                 </a>
+)}
                 
                 <button
                   onClick={handleToggleSave}
@@ -142,7 +146,7 @@ const BookDetailPage = () => {
             <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-secondary-200">
               <div className="flex flex-wrap gap-2 mb-6">
                 <span className="px-3 py-1 rounded-full bg-secondary-100 text-secondary-700 text-xs font-bold uppercase tracking-wider">
-                  {t(`subjects.${book.subject.toLowerCase()}`)}
+                  {t(`subjects.${(book.subject || '').toLowerCase()}`)}
                 </span>
                 <span className="px-3 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-bold uppercase tracking-wider">
                   {book.language?.toUpperCase()}
