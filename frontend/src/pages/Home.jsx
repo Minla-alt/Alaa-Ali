@@ -31,6 +31,12 @@ const Home = () => {
               >
                 {t('home.hero.ctaBooks', 'Browse Books')}
               </Link>
+              <Link
+                to="/signup"
+                className="bg-primary-900 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-primary-800 transition-colors duration-200 inline-block"
+              >
+                {t('home.hero.ctaSignup', 'Create free account')}
+              </Link>
             </div>
           </div>
         </div>
